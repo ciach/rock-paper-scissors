@@ -20,6 +20,11 @@ function generateComputerChoice() {
     computerChoiceDisplay.innerHTML = computerChoice;
 }
 
+function playSound(filename) {
+    const audio = new Audio(filename);
+    audio.play();
+}
+
 function getResult() {
     const gameRules = {
         rock: ['scissors', 'lizard'],
@@ -31,10 +36,13 @@ function getResult() {
 
     if (userChoice === computerChoice) {
         result = "It's a draw!";
+        playSound('sounds/draw.wav');
     } else if (gameRules[userChoice].includes(computerChoice)) {
         result = 'You won!';
+        playSound(`sounds/${userChoice}_beats_${computerChoice}.wav`);
     } else {
         result = 'You lost!';
+        playSound(`sounds/${computerChoice}_beats_${userChoice}.wav`);
     }
 
     resultDisplay.innerHTML = result;
