@@ -8,7 +8,7 @@ on:
 jobs:
   notify_slack:
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'tests')
+    if: contains(github.event.pull_request.labels.*.name, 'tests-e2e')
     steps:
       - name: Send Slack Notification
         uses: slackapi/slack-github-action@v1.24.0
@@ -21,3 +21,4 @@ jobs:
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
